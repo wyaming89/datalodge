@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.0/dist/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="width: 900px;height:600px;"></div>
+    <script type="module">
+        
+
+        var chartDom = document.getElementById('main');
+        var myChart = echarts.init(chartDom);
+        var option;
+        var node = [
+            {
+                name: 'All scanner 2020'
+            },
+            {
+                name: "Dec scanner"
+            },
+            {
+                name: "Jan-Nov scanner"
+            },
+            {
+                name: "Jan & Feb with Purchase and ARPU > LH all buyers 1215 ARPU (DJF CRM ARPU)"
+            },
+            {
+                name:"Jan & Feb with Purchase and ARPU < LH all buyers ARPU (DJF CRM ARPU)"
+            },
+            {
+                name:"Jan & Feb without Purchase"
+            },
+            {
+                name:"Dec & Jan & Feb with purchase and ARPU > LH all buyers 1215 ARPU (DJF CRM ARPU)"
+            },
+            {
+                name:"Dec & Jan & Feb with purchase and ARPU < LH all buyers 1215 ARPU (DJF CRM ARPU)"
+            },
+            {
+                name:"Dec & Jan & Feb without Purchase - P6M scan"
+            },
+            {
+                name:"higher ARPU group"
+            },
+            {
+                name:"ARPU Uplift Group"
+            },
+            {
+                name:"High win back"
+            },
+            {
+                name:"mid win back"
+            },
+            {
+                name:"group1"
+            },{
+                name:"group2"
+            },{
+                name:"group3"
+            },{
+                name:"group4"
+            }
+        ]
+
+        option = {
+            title:{
+                text:"cohort diagram"
+            },
+            tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove'
+        },
+            series: {
+                type: 'sankey',
+                layout: 'none',
+                emphasis: {
+                    focus: 'adjacency'
+                },
+                data: node,
+                links: [{
+                    source: 'All scanner 2020',
+                    target: 'Dec scanner',
+                    value: 51266
+                }, 
+                {
+                    source: 'Dec scanner',
+                    target: 'Jan & Feb with Purchase and ARPU > LH all buyers 1215 ARPU (DJF CRM ARPU)',
+                    value: 6726
+                }, {
+                    source: 'Dec scanner',
+                    target: 'Jan & Feb with Purchase and ARPU < LH all buyers ARPU (DJF CRM ARPU)',
+                    value: 5744
+                }, {
+                    source: 'Dec scanner',
+                    target: 'Jan & Feb without Purchase',
+                    value: 38796
+                },
+                {
+                    source: 'All scanner 2020',
+                    target: 'Jan-Nov scanner',
+                    value: 144210
+                },  {
+                    source: 'Jan-Nov scanner',
+                    target: 'Dec & Jan & Feb with purchase and ARPU > LH all buyers 1215 ARPU (DJF CRM ARPU)',
+                    value: 19025
+                },{
+                    source:"Jan-Nov scanner",
+                    target:"Dec & Jan & Feb with purchase and ARPU < LH all buyers 1215 ARPU (DJF CRM ARPU)",
+                    value:13448
+                },{
+                    source:"Jan-Nov scanner",
+                    target:"Dec & Jan & Feb without Purchase - P6M scan",
+                    value:111737
+                },{
+                    source:'Jan & Feb with Purchase and ARPU > LH all buyers 1215 ARPU (DJF CRM ARPU)',
+                    target:'higher ARPU group',
+                    value:6726
+                },{
+                    source:'Dec & Jan & Feb with purchase and ARPU > LH all buyers 1215 ARPU (DJF CRM ARPU)',
+                    target:'higher ARPU group',
+                    value:19025
+                },{
+                    source:'Jan & Feb with Purchase and ARPU < LH all buyers ARPU (DJF CRM ARPU)',
+                    target:"ARPU Uplift Group",
+                    value:5744
+                },{
+                    source:"Dec & Jan & Feb with purchase and ARPU < LH all buyers 1215 ARPU (DJF CRM ARPU)",
+                    target:"ARPU Uplift Group",
+                    value:13448
+                },{
+                    source:'Jan & Feb without Purchase',
+                    target:"High win back",
+                    value:38796
+                },{
+                    source:"Dec & Jan & Feb without Purchase - P6M scan",
+                    target:"mid win back",
+                    value:111737
+                },{
+                    source:'higher ARPU group',
+                    target:"group1",
+                    value:15000
+                },
+                {
+                    source:"ARPU Uplift Group",
+                    target:"group2",
+                    value:15000
+                },{
+                    source:"High win back",
+                    target:"group3",
+                    value:15000
+                },{
+                    source:"mid win back",
+                    target:'group4',
+                    value:15000
+                }
+            ],
+            emphasis: {
+                    focus: 'adjacency'
+                },
+                lineStyle: {
+                    color: 'gradient',
+                    curveness: 0.5
+                }
+            }
+        };
+
+        option && myChart.setOption(option);
+
+    </script>
+</body>
+</html>
