@@ -1,17 +1,30 @@
 name: github actions
-on: [push]
+on: 
+    schedule:
+        - cron: "0 18 * * *"
 jobs:
-    Explore-GitHub-Actions:
+    build:
         runs-on: ubuntu-latest
         steps:
-            - run: echo "the job was automatically triggered by a ${{ github.event_name }} event."
-            - run: echo "this job is running on a ${{ runner.os }} server hosted by github"
-            - run: echo "the name of your branch is ${{github.ref}} and your repository is ${{github.repository}}"
             - name: Check out repository code
-              uses: actions/checkout@v2
-            - run: echo "🍏 ${{ github.repository }} has been cloned to the runner"
-            - run: echo " the workflow is now ready to test your code on the runner"
-            - name: List files in the repository
+              uses: actions/checkout@v4
+            - name: set up python3.8
+              uses: actions/setup-python@v4
+              with: python-version: '3.8'
+            
+            - name: install dependencies
               run: |
-                ls ${{ github.workspace }}
-            - run: echo "this job's status is ${{ job.status }}"
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
+
+            - name: run script
+              run: python src/main.py
+
+            - name: push to main
+              run: |
+                git config --global user.name "wyaming89"
+                git config --global user.email "wyaming89@gmail.com"
+
+                git add -A
+                git commit -m "update"
+                git push -u origin main
