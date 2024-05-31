@@ -31,8 +31,8 @@ def data_init():
     sql_init = """
     CREATE TABLE IF NOT EXISTS gzdata(
         type text,
-        create_time text,
         area text,
+        create_time text,
         house_num int,
         house_area float,
         commercial_units_num int,
