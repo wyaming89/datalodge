@@ -19,7 +19,7 @@ def request_data(url):
     return json.loads(response.json()).get('data')
 
 def save_data(data):
-    con = sqlite3.connect('data.db')
+    con = sqlite3.connect('data/data.db')
     cur = con.cursor()
     cur.executemany('INSERT INTO gzdata VALUES (?,?,?,?,?,?,?,?,?,?,?)', data)
     con.commit()
