@@ -1,0 +1,7 @@
+
+target/
+dbt_packages/
+logs/
+dbt-env/
+datalodge/target/
+datalodge/dbt_packages/
