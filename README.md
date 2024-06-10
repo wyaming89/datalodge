@@ -9,4 +9,4 @@ a data project for trying some data tool
 - [ ] 用 dbt/pandas 做数据处理
 - [ ] 用 echarts 做数据可视化
 
-![echart]('echart/echart.svg')
+![echart](echart/echart.svg)
