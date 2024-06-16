@@ -1,5 +1,6 @@
-import httpx
 import json 
+from datetime import datetime
+import httpx
 import sqlite3
 
 URLS = [
@@ -47,10 +48,16 @@ def data_init():
     con.commit()
     con.close()
 
+def date_format(date_str):
+    date = datetime.strptime(date_str, '%Y/%m/%d %H:%M:%S')
+    return date.strftime('%Y-%m-%d %H:%M:%S')
+
 def main():
     data_init()
     for type, url in URLS:
         data = request_data(url)
+        # for d in data:
+        #     d['create_time'] = date_format(d['create_time'])
         data = [(type, *(d.values())) for d in data]
         save_data(data)
 

@@ -5,3 +5,4 @@ logs/
 dbt-env/
 datalodge/target/
 datalodge/dbt_packages/
+node_modules/
