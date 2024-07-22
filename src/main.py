@@ -1,5 +1,6 @@
+import json
+from datetime import datetime 
 import httpx
-import json 
 import sqlite3
 
 URLS = [
@@ -47,10 +48,16 @@ def data_init():
     con.commit()
     con.close()
 
+def strtoisodate(strdate:str):
+    s =  datetime.strptime(strdate, '%Y/%m/%d %H:%M:%S')
+    return s.strftime('%Y-%m-%d %H:%M:%S')
+
 def main():
     data_init()
     for type, url in URLS:
         data = request_data(url)
+        for d in data:
+            d['create_time'] = strtoisodate(d['create_time'])
         data = [(type, *(d.values())) for d in data]
         save_data(data)
 
