@@ -22,7 +22,7 @@ def request_data(url):
 def save_data(data):
     con = sqlite3.connect('data/data.db')
     cur = con.cursor()
-    cur.executemany('INSERT INTO gzdata VALUES (?,?,?,?,?,?,?,?,?,?,?)', data)
+    cur.executemany('INSERT INTO gzdata2 VALUES (?,?,?,?,?,?,?,?,?,?,?)', data)
     con.commit()
     con.close()
     
@@ -56,8 +56,8 @@ def main():
     data_init()
     for type, url in URLS:
         data = request_data(url)
-        # for d in data:
-        #     d['create_time'] = date_format(d['create_time'])
+        for d in data:
+            d['create_time'] = date_format(d['create_time'])
         data = [(type, *(d.values())) for d in data]
         save_data(data)
 
