@@ -57,7 +57,7 @@ def main():
     for type, url in URLS:
         data = request_data(url)
         for d in data:
-            d['create_time'] = date_format(d['create_time'])
+            d["createTime"] = date_format(d["createTime"])
         data = [(type, *(d.values())) for d in data]
         save_data(data)
 
