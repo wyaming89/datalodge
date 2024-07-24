@@ -1,5 +1,5 @@
-import json
-from datetime import datetime 
+import json 
+from datetime import datetime
 import httpx
 import sqlite3
 
@@ -22,7 +22,7 @@ def request_data(url):
 def save_data(data):
     con = sqlite3.connect('data/data.db')
     cur = con.cursor()
-    cur.executemany('INSERT INTO gzdata VALUES (?,?,?,?,?,?,?,?,?,?,?)', data)
+    cur.executemany('INSERT INTO gzdata2 VALUES (?,?,?,?,?,?,?,?,?,?,?)', data)
     con.commit()
     con.close()
     
@@ -48,16 +48,16 @@ def data_init():
     con.commit()
     con.close()
 
-def strtoisodate(strdate:str):
-    s =  datetime.strptime(strdate, '%Y/%m/%d %H:%M:%S')
-    return s.strftime('%Y-%m-%d %H:%M:%S')
+def date_format(date_str):
+    date = datetime.strptime(date_str, '%Y/%m/%d %H:%M:%S')
+    return date.strftime('%Y-%m-%d %H:%M:%S')
 
 def main():
     data_init()
     for type, url in URLS:
         data = request_data(url)
         for d in data:
-            d['create_time'] = strtoisodate(d['create_time'])
+            d["createTime"] = date_format(d["createTime"])
         data = [(type, *(d.values())) for d in data]
         save_data(data)
 
